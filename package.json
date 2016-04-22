@@ -4,6 +4,7 @@
   "description": "Chrome Devtools custom formatter for arcgis-js-api objects",
   "main": "dist/arcgis-js-api-devtools",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
