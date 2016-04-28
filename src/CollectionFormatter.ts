@@ -1,24 +1,31 @@
-import { Formatter, HTMLTemplate } from "./interfaces";
-import { classNameStyle } from "./styles";
+import { Formatter, HTMLTemplate, config } from "./interfaces";
+import { classNameStyle, keyStyle, listStyle } from "./styles";
 import { className, reference } from "./utils";
+import JSONMLElement from './JSONMLElement';
 
 export default class CollectionFormatter implements Formatter {
-  header(object: any, config: any): HTMLTemplate {
-    if (!object.__accessor__ || !Array.isArray(object._items)) {
-      return null;
-    }
-    
-    return ["span", ["span", classNameStyle, className(object)], ["span", `[${object.length}]`]];
+  
+  accept(object: any): boolean {
+    return object && object.__accessor__ != null && Array.isArray(object._items);
   }
-  hasBody(object: any, config: any): boolean {
+  
+  preview(object: any): any {
+    let element = new JSONMLElement("span");
+    element.createChild("span").createTextChild(className(object));
+    element.createChild("span").createTextChild(`[${object.length}]`);
+    return element;
+  }
+  
+  hasChildren(object: any): boolean {
     return object.length > 0;
   }
-  body(object: any, config: any): HTMLTemplate {
-    let children = object
-      .map((child: any, index: number) => {
-        return ["li", {}, reference(child)];
-      })
-      .toArray();
-    return [ "ol", {}, ...children ];
+  
+  children(object: any): { name: string, value: any }[] {
+    let result: { name: string, value: any }[] = [];
+    let elements: any[] = object.toArray();
+    for (let i = 0; i < elements.length; ++i) {
+        result.push({name: i + "", value: elements[i]});
+    }
+    return result;
   }
 }

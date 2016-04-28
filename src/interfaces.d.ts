@@ -5,7 +5,12 @@ export type style = { style: string };
 export type HTMLTemplate = any[];
 
 export interface Formatter {
-  header(object: any, config: any): HTMLTemplate;
-  hasBody(object: any, config: any): boolean;
-  body(object: any, config: any): HTMLTemplate;
+  accept(object: any): boolean;
+  preview(object: any): any;
+  hasChildren(object: any): boolean;
+  children(object: any): { name: string, value: any }[];
+}
+
+export interface config {
+  propertyName: string;
 }

@@ -1,6 +1,5 @@
-import CollectionFormatter from "./CollectionFormatter";
-import AccessorFormatter from "./AccessorFormatter";
-import AccessoireFormatter from "./AccessoireFormatter";
+import ArcGISJSAPIFormatter from "./ArcGISJSAPIFormatter";
+import JSONMLFormatter from "./JSONMLFormatter";
 
 let installed = false;
 
@@ -16,7 +15,7 @@ export function installDevtools() {
   
   var devtoolsFormatters = (window as any).devtoolsFormatters = (window as any).devtoolsFormatters || [];
   
-  devtoolsFormatters.push(new CollectionFormatter(), new AccessorFormatter(), new AccessoireFormatter());
+  devtoolsFormatters.push(new JSONMLFormatter(new ArcGISJSAPIFormatter()));
   
   installed = true;
 }
