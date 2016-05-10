@@ -28,6 +28,8 @@ Open the Chrome DevTools settings page and check the option _"Enable custom form
 
 #### Import and install the devtools formatters
 
+Require the appropriate module and invoke `install()` to enable the formatter.
+
 ```js
 require({
   packages: [
