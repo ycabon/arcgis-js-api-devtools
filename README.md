@@ -12,6 +12,9 @@ Example of an `esri/Map` default console formatting:
 Example of an `esri/Map` custom console formatting:  
 ![esri/Map custom console formatting](docs/formatted-output.png)
 
+Example of an `esri/symbols/SimpleFillSymbol` custom console formatting:  
+![esri/symbols/SimpleFillSymbol custom console formatting](docs/formatted-simple-fill-symbol.png)
+
 
 Usage
 ---
