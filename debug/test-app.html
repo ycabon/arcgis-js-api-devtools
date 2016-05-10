@@ -11,14 +11,15 @@
   <script>
     require({
       packages: [
-        { name: "arcgis-devtools", location: "https://rawgit.com/ycabon/arcgis-js-api-devtools/master/dist" }
+        { name: "arcgis-devtools", location: location.href.substring(0, location.href.lastIndexOf('/') + 1) + "../dist" }
       ]
     }, [
       "arcgis-devtools",
-
+      
       "esri/Map"
     ], function(
       arcgisDevtools,
+      Color,
       Map
     ) {
       arcgisDevtools.install();
