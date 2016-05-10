@@ -14,11 +14,10 @@
         }
         JSONMLElement.prototype.appendChild = function (element) {
             this._jsonML.push(element.toJSONML());
+            return element;
         };
         JSONMLElement.prototype.createChild = function (tagName) {
-            var child = new JSONMLElement(tagName);
-            this.appendChild(child);
-            return child;
+            return this.appendChild(new JSONMLElement(tagName));
         };
         JSONMLElement.prototype.createObjectTag = function (object) {
             var tag = this.createChild("object");

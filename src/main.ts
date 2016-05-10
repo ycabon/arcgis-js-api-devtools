@@ -3,7 +3,7 @@ import JSONMLFormatter from "./JSONMLFormatter";
 
 let installed = false;
 
-export function installDevtools() {
+export function install() {
   if (typeof window === "undefined") {
     throw new Error("Can only install immutable-devtools in a browser environment.");
   }
@@ -13,11 +13,11 @@ export function installDevtools() {
     return;
   }
   
-  var devtoolsFormatters = (window as any).devtoolsFormatters = (window as any).devtoolsFormatters || [];
+  let devtoolsFormatters = (window as any).devtoolsFormatters = (window as any).devtoolsFormatters || [];
   
   devtoolsFormatters.push(new JSONMLFormatter(new ArcGISJSAPIFormatter()));
   
   installed = true;
 }
 
-export default installDevtools;
+export default install;

@@ -1,9 +1,5 @@
-import { nullStyle, keyStyle } from "./styles";
-
-import { config } from "./interfaces";
-
 export function className(object: any): string {
-  let declaredClass = object.declaredClass
+  let declaredClass = object.declaredClass;
   
   if (!declaredClass) {
     return null;
@@ -17,21 +13,6 @@ export function className(object: any): string {
   
   return declaredClass.substring(lastIndexOfPoint + 1, declaredClass.length);
 }
-
-export function reference(object: any, config: config): any  {
-  if (typeof object === "undefined") {
-    return ["span", ["span", keyStyle, `  ${config.propertyName}: `], ["span", nullStyle, "undefined"]];
-  }
-  else if (object === "null") {
-    return ["span", ["span", keyStyle, `  ${config.propertyName}: `], ["span", nullStyle, "null"]];
-  }
-  
-  if (object && (object.__accessor__ || object._accessorProps)) {
-    return ["object", {object, config}];
-  }
-  
-  return ["span", ["span", keyStyle, `  ${config.propertyName}: `], ["object", {object, config}]];
-};
 
 export function propertyNames(object: any): string[] {
   return object._accessorProps ? 

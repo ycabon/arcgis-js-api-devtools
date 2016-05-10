@@ -17,15 +17,17 @@
                 return null;
             }
             var child = this._formatter.preview(object);
-            if (child === null) {
-                return null;
-            }
             var preview = config && config.preview;
             var header = new JSONMLElement_1.default("span");
             if (preview) {
                 header.appendChild(preview);
             }
-            header.createTextChild(child);
+            if (child && typeof child === "string") {
+                header.createTextChild(child);
+            }
+            else {
+                header.appendChild(child);
+            }
             return header.toJSONML();
         };
         JSONMLFormatter.prototype.hasBody = function (object, config) {
@@ -34,7 +36,7 @@
         JSONMLFormatter.prototype.body = function (object) {
             var formatter = this._formatter;
             var body = new JSONMLElement_1.default("ol");
-            body.setStyle("list-style-type:none; padding-left: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 12px");
+            body.setStyle("list-style-type: none; padding: 0; margin: 0 0 0 12px; font-style: normal");
             var children = formatter.children(object);
             for (var _i = 0, children_1 = children; _i < children_1.length; _i++) {
                 var child = children_1[_i];
@@ -50,10 +52,16 @@
                     }
                 }
                 else {
-                    li.setStyle("padding-left: 13px;");
                     li.appendChild(nameSpan);
-                    if (typeof child.value === "string") {
-                        li.createTextChild("\"" + child.value + "\"");
+                    li.setStyle("padding-left: 13px;");
+                    if (child.value === undefined) {
+                        var valueSpan = new JSONMLElement_1.default("span");
+                        valueSpan.createTextChild("undefined");
+                        valueSpan.setStyle("color: #777");
+                        li.appendChild(valueSpan);
+                    }
+                    else {
+                        li.createObjectTag(child.value);
                     }
                 }
             }

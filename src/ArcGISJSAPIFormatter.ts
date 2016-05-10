@@ -9,22 +9,6 @@ export default class ArcGISJSAPIFormatter {
   private _formatters: Formatter[] = [new CollectionFormatter(), new AccessorFormatter(), new AccessoireFormatter()];
   
   accept(object: any) {
-    if (typeof object === "undefined") {
-      return false;
-    }
-
-    if (typeof object === "number") {
-      return false;
-    }
-
-    if (typeof object === "string") {
-      return false;
-    }
-
-    if (!object) {
-      return false;
-    }
-    
     for (let formatter of this._formatters) {
       if (formatter.accept(object)) {
         return true;
@@ -53,8 +37,9 @@ export default class ArcGISJSAPIFormatter {
   }
 
   children(object: any) {
-    if (!object)
+    if (!object) {
       return [];
+    }
 
     for (let formatter of this._formatters) {
       if (formatter.accept(object)) {

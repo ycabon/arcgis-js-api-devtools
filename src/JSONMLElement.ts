@@ -12,21 +12,20 @@ export default class JSONMLElement {
   
   appendChild(element: JSONMLElement) {
     this._jsonML.push(element.toJSONML());
+    return element;
   }
 
   createChild(tagName: tagName) {
-    var child = new JSONMLElement(tagName);
-    this.appendChild(child);
-    return child;
+    return this.appendChild(new JSONMLElement(tagName));
   }
 
   createObjectTag(object: any) {
-    var tag = this.createChild("object");
+    let tag = this.createChild("object");
     tag.addAttribute("object", object);
     return tag;
   }
 
-  setStyle(style: string){
+  setStyle(style: string) {
     this._attributes["style"] = style;
   }
 

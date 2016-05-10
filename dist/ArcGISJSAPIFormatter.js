@@ -15,18 +15,6 @@
             this._formatters = [new CollectionFormatter_1.default(), new AccessorFormatter_1.default(), new AccessoireFormatter_1.default()];
         }
         ArcGISJSAPIFormatter.prototype.accept = function (object) {
-            if (typeof object === "undefined") {
-                return false;
-            }
-            if (typeof object === "number") {
-                return false;
-            }
-            if (typeof object === "string") {
-                return false;
-            }
-            if (!object) {
-                return false;
-            }
             for (var _i = 0, _a = this._formatters; _i < _a.length; _i++) {
                 var formatter = _a[_i];
                 if (formatter.accept(object)) {
@@ -53,8 +41,9 @@
             return false;
         };
         ArcGISJSAPIFormatter.prototype.children = function (object) {
-            if (!object)
+            if (!object) {
                 return [];
+            }
             for (var _i = 0, _a = this._formatters; _i < _a.length; _i++) {
                 var formatter = _a[_i];
                 if (formatter.accept(object)) {

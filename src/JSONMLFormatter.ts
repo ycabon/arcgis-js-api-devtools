@@ -18,16 +18,20 @@ export default class JSONMLFormatter {
     }
     
     let child = this._formatter.preview(object);
-    if (child === null) {
-      return null;
-    }
     
     let preview = config && config.preview;
     let header = new JSONMLElement("span");
     if (preview) {
       header.appendChild(preview);
     }
-    header.createTextChild(child);
+    
+    if (child && typeof child === "string") {
+      header.createTextChild(child);
+    }
+    else {
+      header.appendChild(child);
+    }
+
     return header.toJSONML();
   }
 
@@ -38,7 +42,7 @@ export default class JSONMLFormatter {
   body(object: any) {
     let formatter = this._formatter;
     let body = new JSONMLElement("ol");
-    body.setStyle("list-style-type:none; padding-left: 0px; margin-top: 0px; margin-bottom: 0px; margin-left: 12px");
+    body.setStyle("list-style-type: none; padding: 0; margin: 0 0 0 12px; font-style: normal");
     
     let children = formatter.children(object);
     
@@ -53,7 +57,6 @@ export default class JSONMLFormatter {
       if (formatter.accept(child.value)) {
         // expandable arrow
         let objectTag = li.createObjectTag(child.value);
-        
         objectTag.addAttribute("config", { preview: nameSpan });
         
         if (!formatter.hasChildren(child.value)) {
@@ -61,14 +64,20 @@ export default class JSONMLFormatter {
         }
       }
       else {
-        li.setStyle("padding-left: 13px;");
         li.appendChild(nameSpan);
+        li.setStyle("padding-left: 13px;");
         
-        if (typeof child.value === "string") {
-          li.createTextChild(`"${child.value}"`);
+        // special treatement if the value is undefined
+        if (child.value === undefined) {
+          let valueSpan = new JSONMLElement("span");
+          valueSpan.createTextChild("undefined");
+          valueSpan.setStyle("color: #777");
+          li.appendChild(valueSpan);
         }
-        // let objectTag = li.createChild("span");
-        // objectTag.appendChild(child.value);
+        else {
+          // else let chrome rendering the value
+          li.createObjectTag(child.value);
+        }
       }
     }
     

@@ -1,6 +1,5 @@
-import { Formatter, HTMLTemplate, config } from "./interfaces";
-import { classNameStyle, keyStyle, listStyle } from "./styles";
-import { className, reference } from "./utils";
+import { Formatter } from "./interfaces";
+import { className } from "./utils";
 import JSONMLElement from './JSONMLElement';
 
 export default class CollectionFormatter implements Formatter {

@@ -31,17 +31,23 @@
     require([
       "arcgis-devtools",
       
-      "esri/geometry/Point"
+      "esri/Map",
+      
+      "esri/views/MapView"
     ], function(
       arcgisDevtools,
-      Point
+      Map, MapView
     ) {
-      arcgisDevtools.installDevtools();
+      arcgisDevtools.install();
+      
+      view = new MapView({
+        container: "viewDiv",
+        map: new Map({
+          basemap: "topo"
+        })
+      });
 
-      var point = new Point();
-      
-      console.log(point);
-      
+      console.log(view);
     });
   </script>
 </head>

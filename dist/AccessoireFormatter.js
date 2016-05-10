@@ -3,10 +3,11 @@
         var v = factory(require, exports); if (v !== undefined) module.exports = v;
     }
     else if (typeof define === 'function' && define.amd) {
-        define(["require", "exports", "./utils"], factory);
+        define(["require", "exports", "./JSONMLElement", "./utils"], factory);
     }
 })(function (require, exports) {
     "use strict";
+    var JSONMLElement_1 = require("./JSONMLElement");
     var utils_1 = require("./utils");
     var AccessoireFormatter = (function () {
         function AccessoireFormatter() {
@@ -15,7 +16,9 @@
             return object && object._accessorProps != null;
         };
         AccessoireFormatter.prototype.preview = function (object) {
-            return utils_1.className(object);
+            var element = new JSONMLElement_1.default("span");
+            element.createChild("span").createTextChild(utils_1.className(object));
+            return element;
         };
         AccessoireFormatter.prototype.hasChildren = function (object) {
             return utils_1.propertyNames(object).length > 0;

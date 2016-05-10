@@ -10,7 +10,7 @@
     var ArcGISJSAPIFormatter_1 = require("./ArcGISJSAPIFormatter");
     var JSONMLFormatter_1 = require("./JSONMLFormatter");
     var installed = false;
-    function installDevtools() {
+    function install() {
         if (typeof window === "undefined") {
             throw new Error("Can only install immutable-devtools in a browser environment.");
         }
@@ -21,8 +21,8 @@
         devtoolsFormatters.push(new JSONMLFormatter_1.default(new ArcGISJSAPIFormatter_1.default()));
         installed = true;
     }
-    exports.installDevtools = installDevtools;
+    exports.install = install;
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = installDevtools;
+    exports.default = install;
 });
 //# sourceMappingURL=main.js.map

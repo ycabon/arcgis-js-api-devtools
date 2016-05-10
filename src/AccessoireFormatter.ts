@@ -1,6 +1,6 @@
-import { Formatter, HTMLTemplate, config } from "./interfaces";
-import { classNameStyle, keyStyle, listStyle } from "./styles";
-import { className, reference, propertyNames } from "./utils";
+import JSONMLElement from "./JSONMLElement";
+import { Formatter } from "./interfaces";
+import { className, propertyNames } from "./utils";
 
 export default class AccessoireFormatter implements Formatter {
 
@@ -9,7 +9,9 @@ export default class AccessoireFormatter implements Formatter {
   }
 
   preview(object: any): any {
-    return className(object);
+    let element = new JSONMLElement("span");
+    element.createChild("span").createTextChild(className(object));
+    return element;
   }
 
   hasChildren(object: any): boolean {
