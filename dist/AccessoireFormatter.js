@@ -3,30 +3,34 @@
         var v = factory(require, exports); if (v !== undefined) module.exports = v;
     }
     else if (typeof define === 'function' && define.amd) {
-        define(["require", "exports", "./styles", "./utils"], factory);
+        define(["require", "exports", "./utils"], factory);
     }
 })(function (require, exports) {
     "use strict";
-    var styles_1 = require("./styles");
     var utils_1 = require("./utils");
     var AccessoireFormatter = (function () {
         function AccessoireFormatter() {
         }
-        AccessoireFormatter.prototype.header = function (object, config) {
-            if (!object._accessorProps) {
-                return null;
-            }
-            return ["span", styles_1.classNameStyle, utils_1.className(object)];
+        AccessoireFormatter.prototype.accept = function (object) {
+            return object && object._accessorProps != null;
         };
-        AccessoireFormatter.prototype.hasBody = function (object, config) {
+        AccessoireFormatter.prototype.preview = function (object) {
+            return utils_1.className(object);
+        };
+        AccessoireFormatter.prototype.hasChildren = function (object) {
             return utils_1.propertyNames(object).length > 0;
         };
-        AccessoireFormatter.prototype.body = function (object, config) {
-            var children = utils_1.propertyNames(object)
-                .map(function (key) {
-                return ["li", ["span", styles_1.defaultValueKeyStyle, key + ": "], utils_1.reference(object[key])];
-            });
-            return ["ol", styles_1.listStyle].concat(children);
+        AccessoireFormatter.prototype.children = function (object) {
+            var result = [];
+            var names = utils_1.propertyNames(object);
+            for (var _i = 0, names_1 = names; _i < names_1.length; _i++) {
+                var name_1 = names_1[_i];
+                result.push({
+                    name: name_1,
+                    value: object[name_1]
+                });
+            }
+            return result;
         };
         return AccessoireFormatter;
     }());

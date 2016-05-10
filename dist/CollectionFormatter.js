@@ -3,31 +3,34 @@
         var v = factory(require, exports); if (v !== undefined) module.exports = v;
     }
     else if (typeof define === 'function' && define.amd) {
-        define(["require", "exports", "./styles", "./utils"], factory);
+        define(["require", "exports", "./utils", './JSONMLElement'], factory);
     }
 })(function (require, exports) {
     "use strict";
-    var styles_1 = require("./styles");
     var utils_1 = require("./utils");
+    var JSONMLElement_1 = require('./JSONMLElement');
     var CollectionFormatter = (function () {
         function CollectionFormatter() {
         }
-        CollectionFormatter.prototype.header = function (object, config) {
-            if (!object.__accessor__ || !Array.isArray(object._items)) {
-                return null;
-            }
-            return ["span", ["span", styles_1.classNameStyle, utils_1.className(object)], ["span", ("[" + object.length + "]")]];
+        CollectionFormatter.prototype.accept = function (object) {
+            return object && object.__accessor__ != null && Array.isArray(object._items);
         };
-        CollectionFormatter.prototype.hasBody = function (object, config) {
+        CollectionFormatter.prototype.preview = function (object) {
+            var element = new JSONMLElement_1.default("span");
+            element.createChild("span").createTextChild(utils_1.className(object));
+            element.createChild("span").createTextChild("[" + object.length + "]");
+            return element;
+        };
+        CollectionFormatter.prototype.hasChildren = function (object) {
             return object.length > 0;
         };
-        CollectionFormatter.prototype.body = function (object, config) {
-            var children = object
-                .map(function (child, index) {
-                return ["li", {}, utils_1.reference(child)];
-            })
-                .toArray();
-            return ["ol", {}].concat(children);
+        CollectionFormatter.prototype.children = function (object) {
+            var result = [];
+            var elements = object.toArray();
+            for (var i = 0; i < elements.length; ++i) {
+                result.push({ name: i + "", value: elements[i] });
+            }
+            return result;
         };
         return CollectionFormatter;
     }());

@@ -23,19 +23,22 @@
     exports.className = className;
     function reference(object, config) {
         if (typeof object === "undefined") {
-            return ["span", styles_1.nullStyle, "undefined"];
+            return ["span", ["span", styles_1.keyStyle, ("  " + config.propertyName + ": ")], ["span", styles_1.nullStyle, "undefined"]];
         }
         else if (object === "null") {
-            return ["span", styles_1.nullStyle, "null"];
+            return ["span", ["span", styles_1.keyStyle, ("  " + config.propertyName + ": ")], ["span", styles_1.nullStyle, "null"]];
         }
-        return ["object", { object: object, config: config }];
+        if (object && (object.__accessor__ || object._accessorProps)) {
+            return ["object", { object: object, config: config }];
+        }
+        return ["span", ["span", styles_1.keyStyle, ("  " + config.propertyName + ": ")], ["object", { object: object, config: config }]];
     }
     exports.reference = reference;
     ;
     function propertyNames(object) {
         return object._accessorProps ?
-            Object.keys(object.constructor._esriMeta.classMetadata.properties) :
-            Object.keys(object.__accessor__.metadatas);
+            Object.keys(object.constructor._esriMeta.classMetadata.properties).sort() :
+            Object.keys(object.__accessor__.metadatas).sort();
     }
     exports.propertyNames = propertyNames;
 });
