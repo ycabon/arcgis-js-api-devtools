@@ -26,12 +26,15 @@
         };
         JSONMLElement.prototype.setStyle = function (style) {
             this._attributes["style"] = style;
+            return this;
         };
         JSONMLElement.prototype.addAttribute = function (key, value) {
             this._attributes[key] = value;
+            return this;
         };
         JSONMLElement.prototype.createTextChild = function (text) {
             this._jsonML.push(text + "");
+            return this;
         };
         JSONMLElement.prototype.toJSONML = function () {
             return this._jsonML;

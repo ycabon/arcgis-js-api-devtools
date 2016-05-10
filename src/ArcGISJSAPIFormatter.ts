@@ -1,12 +1,13 @@
 import { Formatter } from "./interfaces";
 
 import CollectionFormatter from "./CollectionFormatter";
+import ColorFormatter from "./ColorFormatter";
 import AccessorFormatter from "./AccessorFormatter";
 import AccessoireFormatter from "./AccessoireFormatter";
 
 export default class ArcGISJSAPIFormatter {
 
-  private _formatters: Formatter[] = [new CollectionFormatter(), new AccessorFormatter(), new AccessoireFormatter()];
+  private _formatters: Formatter[] = [new CollectionFormatter(), new ColorFormatter(), new AccessorFormatter(), new AccessoireFormatter()];
   
   accept(object: any) {
     for (let formatter of this._formatters) {

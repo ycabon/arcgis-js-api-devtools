@@ -27,14 +27,17 @@ export default class JSONMLElement {
 
   setStyle(style: string) {
     this._attributes["style"] = style;
+    return this;
   }
 
   addAttribute(key: string, value: any) {
     this._attributes[key] = value;
+    return this;
   }
 
   createTextChild(text: any) {
     this._jsonML.push(text + "");
+    return this;
   }
 
   toJSONML() {
