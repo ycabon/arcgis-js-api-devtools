@@ -13,16 +13,17 @@ Example of an `esri/Map` custom console formatting:
 ![esri/Map custom console formatting](docs/formatted-output.png)
 
 
-#### Usage
+Usage
+---
 
-###### 1. Enable custom formatters in Chrome Devtools
+#### Enable custom formatters in Chrome Devtools
 
 Open the Chrome DevTools settings page and check the option _"Enable custom formatters"_
 
 ![DevTools settings](docs/devtools-settings.png)
 
 
-###### 2. Import and install the devtools formatters
+#### Import and install the devtools formatters
 
 ```js
 require({
