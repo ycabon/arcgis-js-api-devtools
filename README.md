@@ -33,7 +33,7 @@ Require the appropriate module and invoke `install()` to enable the formatter.
 ```js
 require({
   packages: [
-    { name: "arcgis-devtools", location: "https://rawgit.com/ycabon/arcgis-js-api-devtools/master/dist" }
+    { name: "arcgis-devtools", location: "https://cdn.jsdelivr.net/gh/ycabon/arcgis-js-api-devtools@1.0/dist" }
   ]
 }, [
   "arcgis-devtools",
