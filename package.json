@@ -1,6 +1,6 @@
 {
   "name": "arcgis-js-api-devtools",
-  "version": "1.0.0",
+  "version": "2.0.1",
   "description": "Chrome Devtools custom formatter for objects from ArcGIS JS API 4 for JavaScript",
   "main": "dist/arcgis-js-api-devtools.js",
   "module": "dist/arcgis-js-api-devtools.esm.js",
