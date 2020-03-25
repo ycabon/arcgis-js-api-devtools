@@ -30,26 +30,9 @@ Open the Chrome DevTools settings page and check the option _"Enable custom form
 
 Require the appropriate module and invoke `install()` to enable the formatter.
 
-```js
-require({
-  packages: [
-    { name: "arcgis-devtools", location: "https://cdn.jsdelivr.net/gh/ycabon/arcgis-js-api-devtools@1.0/dist" }
-  ]
-}, [
-  "arcgis-devtools",
-
-  "esri/Map"
-], function(
-  arcgisDevtools,
-  Map
-) {
-  arcgisDevtools.install();
-
-  var map = new Map({
-    basemap: "dark-gray",
-    ground: "world-elevation"
-  });
-
-  console.log(map);
-});
+```html
+<script type="module">
+  import { installArcGISAPIChromeDevtoolsFormatter } from "https://cdn.jsdelivr.net/npm/arcgis-js-api-devtools/dist/arcgis-js-api-devtools.esm.js";
+  installArcGISAPIChromeDevtoolsFormatter();
+</script>
 ```
