@@ -2,10 +2,15 @@
   "name": "arcgis-js-api-devtools",
   "version": "1.0.0",
   "description": "Chrome Devtools custom formatter for objects from ArcGIS JS API 4 for JavaScript",
-  "main": "dist/main",
+  "main": "dist/arcgis-js-api-devtools.js",
+  "module": "dist/arcgis-js-api-devtools.esm.js",
+  "types": "dist/arcgis-js-api-devtools.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup --config",
+    "watch": "rollup --config --watch"
   },
   "repository": {
     "type": "git",
@@ -16,16 +21,21 @@
     "devtools",
     "formatter",
     "arcgis",
-    "arcgis-js-api"
+    "arcgis-js-api",
+    "esrijs"
   ],
-  "author": "Yann Cabon",
+  "author": "Yann Cabon <ycabon@esri.com>",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/ycabon/arcgis-js-api-devtools/issues"
   },
   "homepage": "https://github.com/ycabon/arcgis-js-api-devtools#readme",
   "devDependencies": {
-    "tslint": "^3.7.4",
-    "typescript": "^1.8.10"
+    "@rollup/plugin-typescript": "^4.0.0",
+    "rollup-plugin-terser": "^5.3.0",
+    "prettier": "2.0.2",
+    "rollup": "^2.2.0",
+    "tslib": "^1.11.1",
+    "typescript": "^3.8.3"
   }
 }

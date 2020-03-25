@@ -1,15 +1,22 @@
-export type tagName = "div" | "span" | "ol" | "li" | "table" | "tr" | "td" | "object";
+export type tagName =
+  | 'div'
+  | 'span'
+  | 'ol'
+  | 'li'
+  | 'table'
+  | 'tr'
+  | 'td'
+  | 'object';
 
 export default class JSONMLElement {
-  
   constructor(tagName: tagName) {
     this._attributes = {};
     this._jsonML = [tagName, this._attributes];
   }
-  
+
   private _attributes: { [key: string]: any };
   private _jsonML: any[];
-  
+
   appendChild(element: JSONMLElement) {
     this._jsonML.push(element.toJSONML());
     return element;
@@ -20,13 +27,13 @@ export default class JSONMLElement {
   }
 
   createObjectTag(object: any) {
-    let tag = this.createChild("object");
-    tag.addAttribute("object", object);
+    let tag = this.createChild('object');
+    tag.addAttribute('object', object);
     return tag;
   }
 
   setStyle(style: string) {
-    this._attributes["style"] = style;
+    this._attributes['style'] = style;
     return this;
   }
 
@@ -36,11 +43,11 @@ export default class JSONMLElement {
   }
 
   createTextChild(text: any) {
-    this._jsonML.push(text + "");
+    this._jsonML.push(text + '');
     return this;
   }
 
   toJSONML() {
-    return this._jsonML; 
+    return this._jsonML;
   }
 }

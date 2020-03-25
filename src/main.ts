@@ -1,23 +1,26 @@
-import ArcGISJSAPIFormatter from "./ArcGISJSAPIFormatter";
-import JSONMLFormatter from "./JSONMLFormatter";
+import ArcGISJSAPIFormatter from './ArcGISJSAPIFormatter';
+import JSONMLFormatter from './JSONMLFormatter';
 
 let installed = false;
 
-export function install() {
-  if (typeof window === "undefined") {
-    throw new Error("Can only install immutable-devtools in a browser environment.");
+export function installArcGISAPIChromeDevtoolsFormatter() {
+  if (typeof window === 'undefined') {
+    console.error(
+      new Error(
+        'Can only install arcgis-js-api-devtools in a browser environment.'
+      )
+    );
   }
 
   // Don't install more than once.
   if (installed === true) {
     return;
   }
-  
-  let devtoolsFormatters = (window as any).devtoolsFormatters = (window as any).devtoolsFormatters || [];
-  
+
+  let devtoolsFormatters = ((window as any).devtoolsFormatters =
+    (window as any).devtoolsFormatters || []);
+
   devtoolsFormatters.push(new JSONMLFormatter(new ArcGISJSAPIFormatter()));
-  
+
   installed = true;
 }
-
-export default install;

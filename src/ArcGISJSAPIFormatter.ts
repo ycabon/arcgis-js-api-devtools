@@ -1,20 +1,24 @@
-import { Formatter } from "./interfaces";
+import { Formatter } from './interfaces';
 
-import CollectionFormatter from "./CollectionFormatter";
-import ColorFormatter from "./ColorFormatter";
-import AccessorFormatter from "./AccessorFormatter";
-import AccessoireFormatter from "./AccessoireFormatter";
+import CollectionFormatter from './CollectionFormatter';
+import ColorFormatter from './ColorFormatter';
+import AccessorFormatter from './AccessorFormatter';
 
 export default class ArcGISJSAPIFormatter {
+  private _formatters: Formatter[] = [
+    new CollectionFormatter(),
+    new ColorFormatter(),
+    new AccessorFormatter(),
+  ];
 
-  private _formatters: Formatter[] = [new CollectionFormatter(), new ColorFormatter(), new AccessorFormatter(), new AccessoireFormatter()];
-  
-  accept(object: any) {
+  accept(object: any): boolean {
     for (let formatter of this._formatters) {
       if (formatter.accept(object)) {
         return true;
       }
     }
+
+    return false;
   }
 
   preview(object: any) {
@@ -47,8 +51,7 @@ export default class ArcGISJSAPIFormatter {
         return formatter.children(object);
       }
     }
-    
+
     return [];
   }
-
 }
